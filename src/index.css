@@ -132,7 +132,7 @@ header {
 }
 
 /* HEADINGS */
-h1 {
+h1, h2 {
   font-weight: 700;
   font-size: 36px;
   position: relative;
@@ -140,8 +140,8 @@ h1 {
   color: rgba(255, 255, 255, 0.93);
 }
 
-h1::selection,
-h1 *::selection {
+ h2::selection,
+ h2 *::selection {
   color: rgba(255, 255, 255, 0.85);
   background-color: rgba(255, 255, 255, 0.05);
 }
@@ -495,7 +495,7 @@ form button span::selection {
 /* HASHTAGS */
 .hashtags {
   position: absolute;
-  right: -137px;
+  right: -80px;
   top: 0px;
 }
 
@@ -535,7 +535,7 @@ form button span::selection {
 .footer {
   position: absolute;
   transform: rotate(-90deg);
-  left: -225px;
+  left: -139px;
   bottom: 174px;
 }
 
