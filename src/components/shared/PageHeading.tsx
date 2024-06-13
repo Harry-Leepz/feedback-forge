@@ -1,3 +1,7 @@
 export default function PageHeading() {
-  return <div>PageHeading</div>;
+  return (
+    <h2>
+      Give Feedback. <span className='u-italic u-medium'>Publicly</span>
+    </h2>
+  );
 }
