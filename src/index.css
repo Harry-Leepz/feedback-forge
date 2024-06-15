@@ -73,7 +73,7 @@ button {
 
 /* BASE */
 body {
-  background-image: linear-gradient(200deg, #007bff, #004cff);
+  background-image: linear-gradient(200deg, #ffa600, #db8700);
   min-height: 100vh;
   font-family: "Inter", sans-serif;
   display: flex;
@@ -509,9 +509,9 @@ form button span::selection {
   align-self: flex-start;
   font-size: 13px;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(6, 6, 6, 0.597);
   padding: 7px 14px 9px;
-  background-color: rgba(255, 255, 255, 0.06);
+  background-color: rgba(0, 0, 0, 0.06);
   border-radius: 500px;
   cursor: pointer;
   transition: all 0.2s;
@@ -519,7 +519,7 @@ form button span::selection {
 
 .hashtags li button:hover,
 .hashtags li button:focus {
-  color: #fff;
+  color: #000000;
   transform: scale(1.11);
 }
 
@@ -528,7 +528,7 @@ form button span::selection {
 }
 
 .hashtags li button::selection {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 /* FOOTER */
@@ -541,7 +541,7 @@ form button span::selection {
 
 /* COPYRIGHT */
 .footer > small {
-  color: #a6adb5;
+  color: #202020;
   font-size: 11px;
 }
 
