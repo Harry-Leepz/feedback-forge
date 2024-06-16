@@ -6,8 +6,9 @@ export default function FeedbackForm() {
   const [text, setText] = useState("");
 
   const onTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setText(event.target.value);
-    console.log(event.target.value);
+    const nextText = event.target.value;
+    if (nextText.length > MAX_CHAR_COUNT) return;
+    setText(nextText);
   };
 
   const textCharCount = MAX_CHAR_COUNT - text.length;
