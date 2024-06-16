@@ -2,8 +2,13 @@ import { useState } from "react";
 
 import { MAX_CHAR_COUNT } from "../../lib/contsants";
 
-export default function FeedbackForm() {
+type FeedbackFormProps = {
+  handleAddToList: (newFeedback: string) => void;
+};
+
+export default function FeedbackForm({ handleAddToList }: FeedbackFormProps) {
   const [text, setText] = useState("");
+  const textCharCount = MAX_CHAR_COUNT - text.length;
 
   const onTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const nextText = event.target.value;
@@ -11,10 +16,14 @@ export default function FeedbackForm() {
     setText(nextText);
   };
 
-  const textCharCount = MAX_CHAR_COUNT - text.length;
+  const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    handleAddToList(text);
+    setText("");
+  };
 
   return (
-    <form className='form'>
+    <form onSubmit={onSubmitHandler} className='form'>
       <textarea
         onChange={onTextChange}
         value={text}
