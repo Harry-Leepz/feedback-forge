@@ -10,6 +10,11 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
+  // Get a list of companies from the feedbacks and remove duplicates
+  const listOfCompanies = feedbacks
+    .map((feedback) => feedback.company)
+    .filter((company, index, self) => self.indexOf(company) === index);
+
   const handleAddToList = async (newFeedback: string) => {
     const companyName = newFeedback
       .split(" ")
@@ -71,7 +76,7 @@ export default function App() {
         handleAddToList={handleAddToList}
       />
 
-      <HashtagList />
+      <HashtagList listOfCompanies={listOfCompanies} />
     </div>
   );
 }
