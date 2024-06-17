@@ -9,11 +9,20 @@ export default function App() {
   const [feedbacks, setFeedbacks] = useState<TFeedbackItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const [selectedCompany, setSelectedCompany] = useState("");
+
+  const filteredFeedbacks = selectedCompany
+    ? feedbacks.filter((feedback) => feedback.company === selectedCompany)
+    : feedbacks;
 
   // Get a list of companies from the feedbacks and remove duplicates
   const listOfCompanies = feedbacks
     .map((feedback) => feedback.company)
     .filter((company, index, self) => self.indexOf(company) === index);
+
+  const handleSelectedCompany = (company: string) => {
+    setSelectedCompany(company);
+  };
 
   const handleAddToList = async (newFeedback: string) => {
     const companyName = newFeedback
@@ -72,11 +81,14 @@ export default function App() {
       <Container
         loading={loading}
         errorMessage={errorMessage}
-        feedbackItems={feedbacks}
+        feedbackItems={filteredFeedbacks}
         handleAddToList={handleAddToList}
       />
 
-      <HashtagList listOfCompanies={listOfCompanies} />
+      <HashtagList
+        listOfCompanies={listOfCompanies}
+        handleSelectedCompany={handleSelectedCompany}
+      />
     </div>
   );
 }
