@@ -24,7 +24,7 @@ export default function FeedbackItem({ feedback }: FeedbackProps) {
         <p>{text}</p>
       </div>
 
-      <p>{daysAgo}d ago</p>
+      <p>{daysAgo === 0 ? "NEW" : `${daysAgo}d`}</p>
     </li>
   );
 }
