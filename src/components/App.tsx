@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import HashtagList from "./hashtag/HashtagList";
 import Container from "./layout/Container";
 import Footer from "./layout/Footer";
@@ -11,14 +11,22 @@ export default function App() {
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedCompany, setSelectedCompany] = useState("");
 
-  const filteredFeedbacks = selectedCompany
-    ? feedbacks.filter((feedback) => feedback.company === selectedCompany)
-    : feedbacks;
+  const filteredFeedbacks = useMemo(
+    () =>
+      selectedCompany
+        ? feedbacks.filter((feedback) => feedback.company === selectedCompany)
+        : feedbacks,
+    [selectedCompany, feedbacks]
+  );
 
   // Get a list of companies from the feedbacks and remove duplicates
-  const listOfCompanies = feedbacks
-    .map((feedback) => feedback.company)
-    .filter((company, index, self) => self.indexOf(company) === index);
+  const listOfCompanies = useMemo(
+    () =>
+      feedbacks
+        .map((feedback) => feedback.company)
+        .filter((company, index, self) => self.indexOf(company) === index),
+    [feedbacks]
+  );
 
   const handleSelectedCompany = (company: string) => {
     setSelectedCompany(company);
