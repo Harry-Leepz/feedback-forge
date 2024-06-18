@@ -8,11 +8,21 @@ type FeedbackProps = {
 };
 
 export default function FeedbackItem({ feedback }: FeedbackProps) {
-  const [open, setOpen] = useState(false);
   const { badgeLetter, company, daysAgo, text, upvoteCount } = feedback;
+  const [open, setOpen] = useState(false);
+  const [upvote, setUpvote] = useState(upvoteCount);
 
   const handleOpenClick = () => {
     setOpen((prev) => !prev);
+  };
+
+  const handleUpvoteClick = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    // prevent the event bubbling up to the parent li element and disable button
+    setUpvote((prev) => prev + 1);
+    e.currentTarget.disabled = true;
+    e.stopPropagation();
   };
 
   return (
@@ -20,10 +30,10 @@ export default function FeedbackItem({ feedback }: FeedbackProps) {
       onClick={handleOpenClick}
       className={`feedback ${open && "feedback--expand"}`}
     >
-      <button>
+      <button onClick={handleUpvoteClick}>
         <TriangleUpIcon />
 
-        <span>{upvoteCount}</span>
+        <span>{upvote}</span>
       </button>
 
       <div>
