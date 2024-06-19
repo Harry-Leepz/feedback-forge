@@ -6,11 +6,12 @@ type FeedbackItemsContextProviderProps = {
 };
 
 type TFeedbackItemsContext = {
-  feedbacks: TFeedbackItem[];
   loading: boolean;
   errorMessage: string;
   listOfCompanies: string[];
   handleAddToList: (newFeedback: string) => void;
+  filteredFeedbacks: TFeedbackItem[];
+  handleSelectedCompany: (company: string) => void;
 };
 
 export const FeedbackItemsContext = createContext<TFeedbackItemsContext | null>(
@@ -23,6 +24,7 @@ export default function FeedbackItemsContextProvider({
   const [feedbacks, setFeedbacks] = useState<TFeedbackItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const [selectedCompany, setSelectedCompany] = useState("");
 
   // Get a list of companies from the feedbacks and remove duplicates
   const listOfCompanies = useMemo(
@@ -32,6 +34,20 @@ export default function FeedbackItemsContextProvider({
         .filter((company, index, self) => self.indexOf(company) === index),
     [feedbacks]
   );
+
+  // Filter feedbacks by selected company
+  const filteredFeedbacks = useMemo(
+    () =>
+      selectedCompany
+        ? feedbacks.filter((feedback) => feedback.company === selectedCompany)
+        : feedbacks,
+    [selectedCompany, feedbacks]
+  );
+
+  // Set the selected company
+  const handleSelectedCompany = (company: string) => {
+    setSelectedCompany(company);
+  };
 
   // Add a new feedback item to the list
   const handleAddToList = async (newFeedback: string) => {
@@ -88,11 +104,12 @@ export default function FeedbackItemsContextProvider({
   return (
     <FeedbackItemsContext.Provider
       value={{
-        feedbacks,
         loading,
         errorMessage,
         listOfCompanies,
         handleAddToList,
+        filteredFeedbacks,
+        handleSelectedCompany,
       }}
     >
       {children}

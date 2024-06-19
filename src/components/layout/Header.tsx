@@ -3,11 +3,7 @@ import Logo from "../shared/Logo";
 import PageHeading from "../shared/PageHeading";
 import Pattern from "../shared/Pattern";
 
-type THeaderProps = {
-  handleAddToList: (newFeedback: string) => void;
-};
-
-export default function Header({ handleAddToList }: THeaderProps) {
+export default function Header() {
   return (
     <header>
       <Pattern />
@@ -16,7 +12,7 @@ export default function Header({ handleAddToList }: THeaderProps) {
 
       <PageHeading />
 
-      <FeedbackForm handleAddToList={handleAddToList} />
+      <FeedbackForm />
     </header>
   );
 }
